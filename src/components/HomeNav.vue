@@ -1,11 +1,11 @@
 <template>
     <nav class='navbar'>
-        <router-link class = "navlink" to="/">
+        <router-link class = "navlink" to="/" exact>
             <img src='../images/hempLogo.png' alt="logo"/> 
         </router-link> 
-        <router-link class = "navlink" to="/philosophy">Our Philosophy</router-link> 
-        <router-link class = "navlink" to="/research">Educational Resources</router-link> 
-        <router-link class = "navlink" to="/signin">Sign In</router-link> 
+        <router-link class = "navlink" :to="{ name: 'philosophy' }" exact>Our Philosophy</router-link> 
+        <router-link class = "navlink" :to="{name: 'research'}" exact>Educational Resources</router-link> 
+        <router-link class = "navlink" :to="{name: 'login-token'}">Sign In</router-link> 
         <!-- <a class= 'navlink' href=''>Our Philosphy</a>
         <a class= 'navlink' href=''>Educational Resources</a>
         <a class= 'navlink' href=''>Sign In</a> -->

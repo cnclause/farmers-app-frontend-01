@@ -1,29 +1,40 @@
 <template>
-  <div class="philosophy">
-    <h1 class="title">Our Philosophy</h1>
-    <philosophy-content />
-    <router-view/>
+<div class="philosophy-pg">
+    <home-nav></home-nav>
+      <div class="philosophy">
+      <h1 class="title">Our Philosophy</h1>
+      <philosophy-content />
+    </div>
   </div>
 </template>
 
 <script>
 import PhilosophyContent from '@/components/PhilosophyContent'
+import HomeNav from '@/components/HomeNav'
+
 
 
 export default {
   name: 'philosophy',
    components: {
-    PhilosophyContent
+    PhilosophyContent,
+    HomeNav
   }
 }
 
 </script>
 
 <style>
-.philosophy{
+
+.philosophy {
   display: flex;
-  flex-flow: column;
+  flex-direction: column;
+  height: 35rem;
+  /* align-content: center; */
   align-items: center;
+  justify-content: space-around;
+  font-family: 'Raleway', sans-serif;
+  font-size: 20pt;
 }
 .title{
   text-align: center;

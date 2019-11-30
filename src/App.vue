@@ -1,17 +1,22 @@
 <template>
   <div id="app">
-    <app-nav></app-nav>
+    <!-- <home-nav></home-nav> -->
     <router-view/>
   </div>
 </template>
 
 <script>
-import AppNav from '@/components/AppNav'
+// import HomeNav from '@/components/AppNav'
 
 export default {
-  components: {
-    AppNav
-  }
+//   components: {
+//     AppNav
+//   },
+  mounted(){
+	console.log("token params", this.$route)
+	this.$store.dispatch('login',this.$route.query.token)
+  },
+
 }
 </script>
 

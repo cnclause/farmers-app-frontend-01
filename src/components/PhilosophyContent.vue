@@ -13,8 +13,9 @@
     display: flex;
     flex-direction: column;
     align-content: center;
+    /* align-items: center; */
     justify-self: center;
-    height: 15rem;
+    height: auto;
     width: 75%;
 }
 

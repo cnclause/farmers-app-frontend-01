@@ -1,8 +1,16 @@
 <template>
   <div class="home">
+    <home-nav></home-nav>
     <div class="title-signup-container">
       <h1 class="title"> Cannect </h1>
-      <a class="sign-in-link" href='#'>Login/Sign Up </a>
+      <a 
+        v-if="!user"
+        class="sign-in-link"
+        :href="getLoginURL"
+        role="button"
+      >
+      Login/Sign Up with Google 
+      </a>
     </div>
     <p class="mission-statement"> Mission: connecting cannabis farmers around the world through collaboration and research</p>
    
@@ -10,10 +18,25 @@
 </template>
 
 <script>
-// @ is an alias to /src
+import { mapState } from 'vuex'
+import HomeNav from '@/components/HomeNav'
+
 
 export default {
   name: 'home',
+   components: {
+    HomeNav
+  },
+  computed: {
+    ...mapState(['user']),
+    getLoginURL(){
+      if (window.location.hostname ==='localhost') {
+        return 'http://localhost:3000/auth/google'
+      } else {
+        return 'http://localhost:8080'
+      }
+    }
+  }
 
 }
 </script>
