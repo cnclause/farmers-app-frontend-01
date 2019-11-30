@@ -7,19 +7,7 @@ export default new Vuex.Store({
   state: {
     token: '',
     user: null,
-    currentUser: {
-      display_name:"Catherine Clause",
-      email:"cnclause123@gmail.com",
-      first_name:"Catherine",
-      google_id:"114516065743523704224",
-      id:1,
-      image_url:null,
-      last_name:"Clause",
-      latitude:null,
-      longitude:null,
-      role_id:null,
-      status: "farmers"
-    }
+    currentUser: {}
   },
   mutations: {
     setToken(state,token){
@@ -60,13 +48,13 @@ export default new Vuex.Store({
         fetch(`http://localhost:3000/user/${id}`)
           .then(response => response.json())
           .then(currentUser => commit("setCurrentUser", currentUser))
-    }, postUser(currentUser){
-        const id = this.state.user.google_id
-        fetch(`http://localhost:3000/user/${id}`, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json'},
-          body: JSON.stringify({ currentUser })
-        }).then(console.log)
+    // }, postUser(userInfo){
+    //     const id = this.state.user.google_id
+    //     fetch(`http://localhost:3000/user/${id}`, {
+    //       method: 'PATCH',
+    //       headers: { 'Content-Type': 'application/json'},
+    //       body: JSON.stringify({ userInfo })
+    //     }).then(console.log)
     }
 
   },

@@ -3,13 +3,15 @@
         <header class="profile-home">
             <logged-in-nav></logged-in-nav>
         </header>
-        <edit-profile
-            v-if="currentUser.status === null"
-            :user="currentUser"
-        /> 
-        <profile-home
-            v-if="currentUser.status != null"
-        /> 
+        <div class="profile-body">
+            <edit-profile
+                v-if="currentUser.status === null"
+                :user="currentUser"
+            /> 
+            <profile-home
+                v-if="currentUser.status != null"
+            /> 
+        </div>
     </div>
 </template>
 
@@ -35,3 +37,12 @@ export default {
     }
 }
 </script>
+
+<style>
+
+.profile-body{
+    display: flex;
+    justify-content:center;
+}
+
+</style>
