@@ -7,7 +7,8 @@ export default new Vuex.Store({
   state: {
     token: '',
     user: null,
-    currentUser: {}
+    currentUser: {},
+    news: {}
   },
   mutations: {
     setToken(state,token){
@@ -18,7 +19,10 @@ export default new Vuex.Store({
     },
     setCurrentUser(state, currentUser){
       state.currentUser = currentUser
-    }
+    },
+    setNewsArticles(state, news){
+      state.news = news
+    },
   },
   getters: {
     isLoggedIn(state) {
@@ -55,6 +59,10 @@ export default new Vuex.Store({
     //       headers: { 'Content-Type': 'application/json'},
     //       body: JSON.stringify({ userInfo })
     //     }).then(console.log)
+    }, fetchNews({ commit }){
+      fetch('https://newsapi.org/v2/everything?q=cannabis&sortBy=popularity&apiKey=fd5ace6ad0b54f9c9dae1cc5004a9fb5')
+        .then(response => response.json())
+        .then(news => commit("setNewsArticles", news.articles))
     }
 
   },

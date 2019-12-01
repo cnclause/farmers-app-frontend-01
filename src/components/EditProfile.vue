@@ -51,7 +51,6 @@ export default {
 //    },
    methods: {
        createProfile(event){
-           event.preventDefault()
            const formData = new FormData(event.target)
 
            const status = formData.get("status")

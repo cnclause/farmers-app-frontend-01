@@ -1,6 +1,6 @@
 <template>
     <div class="profile">
-        <header class="profile-home">
+        <header class="profile-header">
             <logged-in-nav></logged-in-nav>
         </header>
         <div class="profile-body">
@@ -10,6 +10,8 @@
             /> 
             <profile-home
                 v-if="currentUser.status != null"
+                :user="currentUser"
+                :news="news"
             /> 
         </div>
     </div>
@@ -29,20 +31,26 @@ export default {
     },
     mounted() {
         this.$store.dispatch("fetchUser")
+        this.$store.dispatch("fetchNews")
     },
     computed: {
         currentUser() {
             return this.$store.state.currentUser
+        },
+        news(){
+            return this.$store.state.news
         }
     }
 }
 </script>
 
-<style>
+<style scoped>
+
+
 
 .profile-body{
     display: flex;
-    justify-content:center;
+    justify-content: center
 }
 
 </style>
