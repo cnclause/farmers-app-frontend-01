@@ -32,6 +32,7 @@ export default {
     mounted() {
         this.$store.dispatch("fetchUser")
         this.$store.dispatch("fetchNews")
+        this.$store.dispatch("fetchWeather")
     },
     computed: {
         currentUser() {
@@ -39,7 +40,8 @@ export default {
         },
         news(){
             return this.$store.state.news
-        }
+        },
+
     }
 }
 </script>

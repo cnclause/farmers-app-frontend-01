@@ -5,7 +5,7 @@
         </router-link> 
         <router-link class = "navlink" :to="{ name: 'philosophy' }" exact>Our Philosophy</router-link> 
         <router-link class = "navlink" :to="{name: 'research'}" exact>Educational Resources</router-link> 
-        <router-link class = "navlink" :to="{name: 'login-token'}">Sign In</router-link> 
+        <!-- <router-link class = "navlink" :to="{name: 'login-token'}">Sign In</router-link>  -->
         <!-- <a class= 'navlink' href=''>Our Philosphy</a>
         <a class= 'navlink' href=''>Educational Resources</a>
         <a class= 'navlink' href=''>Sign In</a> -->

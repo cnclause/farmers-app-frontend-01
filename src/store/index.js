@@ -7,8 +7,9 @@ export default new Vuex.Store({
   state: {
     token: '',
     user: null,
-    currentUser: {},
-    news: {}
+    currentUser: null,
+    news: {},
+    weather: {}
   },
   mutations: {
     setToken(state,token){
@@ -22,6 +23,9 @@ export default new Vuex.Store({
     },
     setNewsArticles(state, news){
       state.news = news
+    },
+    setWeather(state, weather){
+      state.weather = weather
     },
   },
   getters: {
@@ -63,6 +67,12 @@ export default new Vuex.Store({
       fetch('https://newsapi.org/v2/everything?q=cannabis&sortBy=popularity&apiKey=fd5ace6ad0b54f9c9dae1cc5004a9fb5')
         .then(response => response.json())
         .then(news => commit("setNewsArticles", news.articles))
+    }, fetchWeather(){
+      fetch('https://api.darksky.net/forecast/1bc137157559751c0a8b94ed9115fbad/42.3601,-71.0589')
+        .then(response => response.json())
+        .then(result => console.log(result))
+        // .then(weather => commit("setWeather", weather))
+        
     }
 
   },

@@ -1,6 +1,11 @@
 <template>
 <div class="philosophy-pg">
-    <home-nav></home-nav>
+    <home-nav
+      v-if="!currentUser"
+    />
+    <logged-in-nav
+      v-if="currentUser"
+    />
       <div class="philosophy">
       <h1 class="title">Our Philosophy</h1>
       <philosophy-content />
@@ -11,6 +16,7 @@
 <script>
 import PhilosophyContent from '@/components/PhilosophyContent'
 import HomeNav from '@/components/HomeNav'
+import LoggedInNav from '@/components/LoggedInNav'
 
 
 
@@ -18,7 +24,13 @@ export default {
   name: 'philosophy',
    components: {
     PhilosophyContent,
-    HomeNav
+    HomeNav,
+    LoggedInNav
+  },
+  computed: {
+    currentUser() {
+        return this.$store.state.currentUser
+    },
   }
 }
 

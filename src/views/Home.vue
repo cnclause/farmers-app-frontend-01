@@ -12,7 +12,7 @@
       Login/Sign Up with Google 
       </a>
     </div>
-    <p class="mission-statement"> Mission: connecting cannabis farmers around the world through collaboration and research</p>
+    <p class="mission-statement"> Connecting cannabis farmers around the world through collaboration and research</p>
    
   </div>
 </template>
@@ -87,6 +87,7 @@ export default {
   align-self: center;
   color: #0e5521;
   border-top: 5rem;
+  font-style: italic;
 
 }
 

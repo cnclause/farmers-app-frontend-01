@@ -1,6 +1,6 @@
 <template>
     <nav class='navbar'>
-        <router-link class = "navlink" to="/" exact>
+        <router-link class = "navlink" :to="{name: 'profile'}">
             <img src='../images/hempLogo.png' alt="logo"/> 
         </router-link> 
         <router-link class = "navlink" :to="{ name: 'philosophy' }" exact>Our Philosophy</router-link> 
@@ -12,4 +12,10 @@
         <a class= 'navlink' href=''>Sign In</a> -->
     </nav>
 </template>
+
+<style>
+.router-link-exact-active {
+      border-top: 2px solid currentColor;
+    }
+</style>
 
