@@ -8,7 +8,7 @@ export default new Vuex.Store({
     token: '',
     user: null,
     currentUser: null,
-    news: {},
+    news: [],
     weather: {}
   },
   mutations: {
@@ -42,14 +42,8 @@ export default new Vuex.Store({
         const base64Url = token.split('.')[1]
         const base64 = base64Url.replace('-', '+').replace('_','/')
         const user = JSON.parse(window.atob(base64))
-        // console.log("user", user)
         commit('setUser', user)
-        // console.log("state", this.state.user.google_id)
       } 
-      // else {
-      //   commit('setToken', '')
-      //   commit('setUser', null)
-      // }
   
     }, fetchUser({ commit }){
         const id = this.state.user.google_id
@@ -67,11 +61,10 @@ export default new Vuex.Store({
       fetch('https://newsapi.org/v2/everything?q=cannabis&sortBy=popularity&apiKey=fd5ace6ad0b54f9c9dae1cc5004a9fb5')
         .then(response => response.json())
         .then(news => commit("setNewsArticles", news.articles))
-    }, fetchWeather(){
-      fetch('https://api.darksky.net/forecast/1bc137157559751c0a8b94ed9115fbad/42.3601,-71.0589')
+    }, fetchWeather({ commit }){
+      fetch('http://localhost:3000/weather/forecast')
         .then(response => response.json())
-        .then(result => console.log(result))
-        // .then(weather => commit("setWeather", weather))
+        .then(weather => commit('setWeather', weather))
         
     }
 

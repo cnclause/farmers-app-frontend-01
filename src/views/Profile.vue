@@ -9,9 +9,10 @@
                 :user="currentUser"
             /> 
             <profile-home
-                v-if="currentUser.status != null"
+                v-if="currentUser.status !== null"
                 :user="currentUser"
                 :news="news"
+                :weather="weather"
             /> 
         </div>
     </div>
@@ -40,6 +41,9 @@ export default {
         },
         news(){
             return this.$store.state.news
+        },
+        weather(){
+            return this.$store.state.weather
         },
 
     }
