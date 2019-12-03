@@ -9,7 +9,8 @@ export default new Vuex.Store({
     user: null,
     currentUser: null,
     news: [],
-    weather: {}
+    weather: {},
+    topics: []
   },
   mutations: {
     setToken(state,token){
@@ -27,6 +28,9 @@ export default new Vuex.Store({
     setWeather(state, weather){
       state.weather = weather
     },
+    setTopics(state, topics){
+      state.topics = topics
+    }
   },
   getters: {
     isLoggedIn(state) {
@@ -58,14 +62,18 @@ export default new Vuex.Store({
     //       body: JSON.stringify({ userInfo })
     //     }).then(console.log)
     }, fetchNews({ commit }){
-      fetch('https://newsapi.org/v2/everything?q=cannabis&sortBy=popularity&apiKey=fd5ace6ad0b54f9c9dae1cc5004a9fb5')
-        .then(response => response.json())
-        .then(news => commit("setNewsArticles", news.articles))
+        fetch('https://newsapi.org/v2/everything?q=cannabis&sortBy=popularity&apiKey=fd5ace6ad0b54f9c9dae1cc5004a9fb5')
+          .then(response => response.json())
+          .then(news => commit("setNewsArticles", news.articles))
     }, fetchWeather({ commit }){
-      fetch('http://localhost:3000/weather/forecast')
-        .then(response => response.json())
-        .then(weather => commit('setWeather', weather))
-        
+        fetch('http://localhost:3000/weather/forecast')
+          .then(response => response.json())
+          .then(weather => commit('setWeather', weather))
+    }, fetchTopics({ commit }){
+        fetch('http://localhost:3000/comments/topics')
+          .then(response => response.json())
+          .then(topics => commit('setTopics', topics))
+
     }
 
   },

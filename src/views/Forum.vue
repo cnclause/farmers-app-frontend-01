@@ -5,7 +5,10 @@
         </header>
         <div class="forum-page">
             <h1 class="forum-title"> Community Discussion </h1>
-            <forum-container></forum-container>
+            <forum-container
+                :topics="topics"
+                :user="currentUser"
+            />
         </div>
     </div>
 </template>
@@ -14,9 +17,21 @@
 import LoggedInNav from '@/components/LoggedInNav'
 import ForumContainer from '@/components/ForumContainer'
 export default {
+    name:"forum",
     components: {
         LoggedInNav,
         ForumContainer
+    },
+    mounted() {
+    this.$store.dispatch("fetchTopics")
+    },
+    computed: {
+        topics() {
+            return this.$store.state.topics
+        },
+        currentUser(){
+            return this.$store.state.currentUser
+        }
     }
 }
 </script>
