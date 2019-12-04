@@ -17,7 +17,7 @@
                 <input type="text" name="display_name"
                 :placeholder= user.display_name
                 required
-                >
+                />
             </div>
             <div class="profile-inputs">
                 <label>First Name</label>

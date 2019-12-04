@@ -1,17 +1,36 @@
 <template>
 <div class="forum-container">
+    <button class="form-button" v-on:click="isHidden = true" v-if="isHidden === false"> Add Topic </button>
+    <button class="form-button" v-on:click="isHidden = false" v-if="isHidden === true"> Hide Form </button>
+    <add-topic
+        v-if="isHidden === true"
+        :user="user"
+        :isHidden="isHidden"
+    />
     <div :key='topic.id' v-for="topic in topics" class="forum-card">
         <h1 class="topic-title">Topic: {{topic.title}}</h1>
-        <p class="topic-description">Description: {{topic.description}}</p>
+        <p class="topic-description">
+            Description: {{topic.description}}
+            <i v-if="user.id === topic.user_id" class="fa fa-pencil"></i>
+        </p>
         <div class="comment-wrapper" v-if="topic.comments.length > 0">
             <div :key="comment.id"  v-for="comment in topic.comments" class="comments">
-                <p class="comment-response">User: {{comment.response}}</p>
+                <p class="comment-response">
+                    User: {{comment.response}}
+                    <i v-if="user.id === topic.user_id" class="fa fa-pencil"></i>
+                </p>
                 <div class="comment-wrapper" v-if="comment.comments.length > 0">
                     <div :key="response.id"  v-for="response in comment.comments" class="comments">
-                        <p class="comment-response-two">User: {{response.response}}</p>
+                        <p class="comment-response-two">
+                            User: {{response.response}}
+                            <i v-if="user.id === topic.user_id" class="fa fa-pencil"></i>
+                        </p>
                         <div class="comment-wrapper" v-if="response.comments.length > 0">
                             <div :key="responses.id"  v-for="responses in response.comments" class="comments">
-                                <p class="comment-response-three">User: {{responses.response}}</p>
+                                <p class="comment-response-three">
+                                    User: {{responses.response}}
+                                    <i v-if="user.id === topic.user_id" class="fa fa-pencil"></i>
+                                </p>
                             </div>
                         </div>
                     </div>
@@ -24,9 +43,22 @@
 </template>
 
 <script>
+import AddTopic from '@/components/AddTopic'
 export default {
+    data(){
+        return {
+            isHidden: false
+        }
+    },
     props:{
-        topics: Array
+        topics: Array,
+        user: Object
+    },
+    components:{
+        AddTopic
+    },
+    methods: {
+     
     }
 }
 </script>
@@ -50,6 +82,7 @@ export default {
     max-height: auto;
     box-shadow:  0 2px 2px hsl(0,0%, 80%);
     align-items: left;
+    padding-bottom: 1rem;
 
 }
 
@@ -77,6 +110,18 @@ export default {
 
 .comment-response-three{
     margin-left: 5rem;
+}
+
+i{
+    margin-left: 0.5rem;
+    color: #8FB339;
+}
+
+.form-button{
+    font-family: 'Raleway', sans-serif;
+    width: auto;
+    font-size: 12pt;
+    margin-bottom: 2rem;
 }
 
 

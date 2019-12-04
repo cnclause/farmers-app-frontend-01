@@ -30,7 +30,7 @@ export default new Vuex.Store({
     },
     setTopics(state, topics){
       state.topics = topics
-    }
+    }, 
   },
   getters: {
     isLoggedIn(state) {
