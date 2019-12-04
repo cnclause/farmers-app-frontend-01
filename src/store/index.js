@@ -51,6 +51,12 @@ export default new Vuex.Store({
                 firstComment.comments.filter(secondComment => {
                   if(comment.parent_id === secondComment.id){
                     secondComment.comments.push(comment)
+                  } else {
+                    secondComment.comments.filter(thirdComment => {
+                      if(comment.parent_id === thirdComment.id){
+                        thirdComment.comments.push(comment)
+                      }
+                    })
                   }
                 })
              }

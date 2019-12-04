@@ -14,35 +14,48 @@
         <p class="topic-description">
             Description: {{topic.description}}
             <i v-if="user.id === topic.user_id" class="fa fa-pencil"></i>
-        </p>
         <add-comment
             :topicId="topic.id"
             :user="user"
             @postComment="postComment"
         />
+        </p>
         <div class="comment-wrapper" v-if="topic.comments && topic.comments.length > 0">
             <div :key="comment.id"  v-for="comment in topic.comments" class="comments">
                 <p class="comment-response">
                    {{user.display_name}}: {{comment.response}}
                     <i v-if="user.id === topic.user_id" class="fa fa-pencil"></i>
+                
+                    <add-response
+                        :topicId="topic.id"
+                        :commentId="comment.id"
+                        :user="user"
+                        @postComment="postComment"
+                    />
                 </p>
-                <add-response
-                    :topicId="topic.id"
-                    :commentId="comment.id"
-                    :user="user"
-                    @postComment="postComment"
-                />
                 <div class="comment-wrapper" v-if="comment.comments && comment.comments.length > 0">
                     <div :key="response.id"  v-for="response in comment.comments" class="comments">
                         <p class="comment-response-two">
                             User: {{response.response}}
                             <i v-if="user.id === topic.user_id" class="fa fa-pencil"></i>
+                            <add-response
+                                :topicId="topic.id"
+                                :commentId="response.id"
+                                :user="user"
+                                @postComment="postComment"
+                            />
                         </p>
                         <div class="comment-wrapper" v-if="response.comments && response.comments.length > 0">
                             <div :key="responses.id"  v-for="responses in response.comments" class="comments">
                                 <p class="comment-response-three">
-                                    User: {{responses.response}}
+                                    THIRD: {{responses.response}}
                                     <i v-if="user.id === topic.user_id" class="fa fa-pencil"></i>
+                                    <add-response
+                                        :topicId="topic.id"
+                                        :commentId="response.id"
+                                        :user="user"
+                                        @postComment="postComment"
+                                    />
                                 </p>
                             </div>
                         </div>
@@ -63,7 +76,10 @@ import AddResponse from '@/components/AddResponse'
 export default {
     data(){
         return {
-            isHidden: false
+            isHidden: false,
+            // showComment: false,
+            // showCommentTwo: false,
+            // showCommentThree: false,
         }
     },
     props:{
@@ -81,7 +97,10 @@ export default {
         },
         postComment(comment){
             this.$emit('postComment', comment)
-        }
+        },
+        // toggleShowComment(){
+        //     this.showComment = !this.showComment
+        // }
     }
 }
 </script>
@@ -123,21 +142,21 @@ export default {
 
 .comment-response, .comment-response-two, .comment-response-three{
     text-align: left;
-    box-shadow:  0 2px 2px hsl(0,0%, 65%);
     width: 80%;
     margin-left: 1rem;
     margin-top: 1rem;
     min-height: 5rem;
     padding-left: 1rem;
     padding-top: 1rem;
+    box-shadow: inset 0 0 5px hsl(0,0%, 65%);
     
 }
 .comment-response-two{
-    margin-left: 3rem;
+    margin-left: 5rem;
 }
 
 .comment-response-three{
-    margin-left: 5rem;
+    margin-left: 9rem;
 }
 
 i{
