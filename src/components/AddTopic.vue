@@ -1,6 +1,6 @@
 <template>
     <div class="add-post">
-    <form v-if="!newTopic" v-on:submit.prevent="addTopic($event)">
+    <form v-if="!newTopic" v-on:submit.prevent="addTopic">
         <label> Topic: </label>
         <input
             type="text"
@@ -48,24 +48,15 @@ export default {
         },
         addTopic(event){
             event.preventDefault()
-
             const formData = new FormData(event.target)
-            const title = formData.get('title')
-            const description= formData.get('description')
-            const user_id = this.user.id
+            this.$emit("postTopic",{
 
-            // const topic ={
-            //     title, description, user_id
-            // }
+             title: formData.get('title'),
+             description:formData.get('description'),
+             user_id: this.user.id
+            })
 
-            fetch('http://localhost:3000/topics', {
-                method: 'POST',
-                headers:{'Content-Type': 'application/json'},
-                body: JSON.stringify({ title, description, user_id })
-            }).then(response =>console.log('response',response))
-            // .then(this.updateNewTopic)
-
-            // event.target.reset()
+            event.target.reset()
         }
     }
 }

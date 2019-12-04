@@ -8,6 +8,7 @@
             <forum-container
                 :topics="topics"
                 :user="currentUser"
+                @postTopic="postTopic"
             />
         </div>
     </div>
@@ -34,9 +35,9 @@ export default {
         }
     },
     methods:{
-        // postTopics(topic){
-        //     this.$store.dispatch('postTopics', topic)
-        // }
+        postTopic(topic){
+            this.$store.dispatch('postTopics', topic)
+        }
     }
 }
 </script>

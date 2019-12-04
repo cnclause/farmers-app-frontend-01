@@ -29,8 +29,11 @@ export default new Vuex.Store({
       state.weather = weather
     },
     setTopics(state, topics){
-      state.topics = topics
-    }, 
+      state.topics=topics
+    },
+    addTopic(state, topic){
+      state.topics=[topic, ...state.topics]
+    }
   },
   getters: {
     isLoggedIn(state) {
@@ -74,12 +77,13 @@ export default new Vuex.Store({
           .then(response => response.json())
           .then(topics => commit('setTopics', topics))
 
-    // }, postTopics({ commit }, topic){
-    //     fetch('http://localhost:3000/topics', {
-    //       method: 'PATCH',
-    //       headers: { 'Content-Type': 'application/json'},
-    //       body: JSON.stringify(topic)
-    //     }).then(topics => commit('setTopics', [...topics, topics]))
+    }, postTopics({ commit }, topic){
+        fetch('http://localhost:3000/topics', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json'},
+          body: JSON.stringify(topic)
+        }).then(response => response.json())
+            .then(topic => commit('addTopic', topic))
     }
 
   },
