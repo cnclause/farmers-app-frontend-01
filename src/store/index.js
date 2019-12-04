@@ -33,6 +33,31 @@ export default new Vuex.Store({
     },
     addTopic(state, topic){
       state.topics=[topic, ...state.topics]
+    },
+    addComment(state, comment){
+      if(!comment.parent_id){
+        state.topics.filter(topic => {
+          if(comment.topic_id === topic.id){
+            topic.comments.push(comment)
+          }
+        })
+      } else {
+        state.topics.filter(topic => {
+          if(comment.topic_id === topic.id){
+            topic.comments.filter(firstComment => {
+             if(comment.parent_id === firstComment.id){
+              firstComment.comments.push(comment)
+             } else {
+                firstComment.comments.filter(secondComment => {
+                  if(comment.parent_id === secondComment.id){
+                    secondComment.comments.push(comment)
+                  }
+                })
+             }
+            })
+          }
+        })
+      }
     }
   },
   getters: {
@@ -84,7 +109,14 @@ export default new Vuex.Store({
           body: JSON.stringify(topic)
         }).then(response => response.json())
             .then(topic => commit('addTopic', topic))
-    }
+    }, postComment({ commit }, comment){
+        fetch('http://localhost:3000/comments', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json'},
+          body: JSON.stringify(comment)
+        }).then(response => response.json())
+            .then(comment => commit('addComment', comment))
+  }
 
   },
   modules: {

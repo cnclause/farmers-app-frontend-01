@@ -17,13 +17,21 @@
         </p>
         <add-comment
             :topicId="topic.id"
+            :user="user"
+            @postComment="postComment"
         />
         <div class="comment-wrapper" v-if="topic.comments && topic.comments.length > 0">
             <div :key="comment.id"  v-for="comment in topic.comments" class="comments">
                 <p class="comment-response">
-                    User: {{comment.response}}
+                   {{user.display_name}}: {{comment.response}}
                     <i v-if="user.id === topic.user_id" class="fa fa-pencil"></i>
                 </p>
+                <add-response
+                    :topicId="topic.id"
+                    :commentId="comment.id"
+                    :user="user"
+                    @postComment="postComment"
+                />
                 <div class="comment-wrapper" v-if="comment.comments && comment.comments.length > 0">
                     <div :key="response.id"  v-for="response in comment.comments" class="comments">
                         <p class="comment-response-two">
@@ -50,6 +58,8 @@
 <script>
 import AddTopic from '@/components/AddTopic'
 import AddComment from '@/components/AddComment'
+import AddResponse from '@/components/AddResponse'
+
 export default {
     data(){
         return {
@@ -62,11 +72,15 @@ export default {
     },
     components:{
         AddTopic,
-        AddComment
+        AddComment,
+        AddResponse
     },
     methods: {
         postTopic(topic){
             this.$emit('postTopic', topic)
+        },
+        postComment(comment){
+            this.$emit('postComment', comment)
         }
     }
 }
@@ -89,9 +103,10 @@ export default {
     margin: 2rem;
     min-height: 15rem;
     max-height: auto;
-    box-shadow:  0 2px 2px hsl(0,0%, 80%);
+    box-shadow:  0px 2px 2px hsl(0,0%, 65%);
     align-items: left;
     padding-bottom: 1rem;
+    border: 1px solid black;
 
 }
 
@@ -99,6 +114,7 @@ export default {
     font-family: 'Raleway', sans-serif;
     text-align: center;
     font-size: 18pt;
+    padding-top: 1rem;
 }
 .topic-description{
     text-align: left;
@@ -107,11 +123,14 @@ export default {
 
 .comment-response, .comment-response-two, .comment-response-three{
     text-align: left;
-    box-shadow:  0 2px 2px hsl(0,0%, 80%);
+    box-shadow:  0 2px 2px hsl(0,0%, 65%);
     width: 80%;
     margin-left: 1rem;
     margin-top: 1rem;
     min-height: 5rem;
+    padding-left: 1rem;
+    padding-top: 1rem;
+    
 }
 .comment-response-two{
     margin-left: 3rem;

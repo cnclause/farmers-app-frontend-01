@@ -1,9 +1,9 @@
 <template>
-    <div class="add-comment-container">
-        <form class ="add-comment-form" v-on:submit.prevent="addComment($event)">
+    <div class="add-response">
+        <form class ="add-comment-form" v-on:submit.prevent="addResponse($event)">
             <textarea
                 name="response"
-                rows="2"
+                rows="1"
                 placeholder="Comment"
                 required
             />
@@ -16,14 +16,16 @@
 export default {
     props:{
         topicId: Number,
+        commentId: Number,
         user: Object
     },
     methods: {
-        addComment(event){
+        addResponse(event){
             event.preventDefault()
             const formData = new FormData(event.target)
             this.$emit("postComment",{
                 response: formData.get('response'),
+                parent_id: this.commentId,
                 topic_id: this.topicId,
                 user_id: this.user.id
             })
@@ -33,20 +35,3 @@ export default {
     }
 }
 </script>
-
-<style>
-.add-comment-form{
-    display: flex;
-    flex-flow: row;
-    justify-content: center;
-}
-
-.add-comment-form textarea{
-    height: 2rem;
-}
-
-.add-comment-form input{
-    width: 6rem;
-    height: 2rem;
-}
-</style>

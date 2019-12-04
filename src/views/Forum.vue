@@ -9,6 +9,7 @@
                 :topics="topics"
                 :user="currentUser"
                 @postTopic="postTopic"
+                @postComment="postComment"
             />
         </div>
     </div>
@@ -37,6 +38,9 @@ export default {
     methods:{
         postTopic(topic){
             this.$store.dispatch('postTopics', topic)
+        },
+        postComment(comment){
+            this.$store.dispatch('postComment', comment)
         }
     }
 }
