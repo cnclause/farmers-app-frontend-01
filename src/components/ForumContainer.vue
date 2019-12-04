@@ -1,7 +1,7 @@
 <template>
 <div class="forum-container">
     <button class="form-button" v-on:click="isHidden = true" v-if="isHidden === false"> Add Topic </button>
-    <button class="form-button" v-on:click="isHidden = false" v-if="isHidden === true"> Hide Form </button>
+    <button class="form-button" v-on:click="isHidden = false" v-if="isHidden === true"> X </button>
     <add-topic
         v-if="isHidden === true"
         :user="user"
@@ -15,19 +15,22 @@
             Description: {{topic.description}}
             <i v-if="user.id === topic.user_id" class="fa fa-pencil"></i>
         </p>
-        <div class="comment-wrapper" v-if="topic.comments.length > 0">
+        <add-comment
+            :topicId="topic.id"
+        />
+        <div class="comment-wrapper" v-if="topic.comments && topic.comments.length > 0">
             <div :key="comment.id"  v-for="comment in topic.comments" class="comments">
                 <p class="comment-response">
                     User: {{comment.response}}
                     <i v-if="user.id === topic.user_id" class="fa fa-pencil"></i>
                 </p>
-                <div class="comment-wrapper" v-if="comment.comments.length > 0">
+                <div class="comment-wrapper" v-if="comment.comments && comment.comments.length > 0">
                     <div :key="response.id"  v-for="response in comment.comments" class="comments">
                         <p class="comment-response-two">
                             User: {{response.response}}
                             <i v-if="user.id === topic.user_id" class="fa fa-pencil"></i>
                         </p>
-                        <div class="comment-wrapper" v-if="response.comments.length > 0">
+                        <div class="comment-wrapper" v-if="response.comments && response.comments.length > 0">
                             <div :key="responses.id"  v-for="responses in response.comments" class="comments">
                                 <p class="comment-response-three">
                                     User: {{responses.response}}
@@ -46,6 +49,7 @@
 
 <script>
 import AddTopic from '@/components/AddTopic'
+import AddComment from '@/components/AddComment'
 export default {
     data(){
         return {
@@ -57,7 +61,8 @@ export default {
         user: Object
     },
     components:{
-        AddTopic
+        AddTopic,
+        AddComment
     },
     methods: {
         postTopic(topic){

@@ -55,7 +55,7 @@
                 src="../images/thunder-rain.png"
                 alt="thunderstorm"
             />
-            <h4>Temperature: {{hourly.temperature}} </h4>
+            <h4>Temperature: {{ calculateTemperature(hourly.temperature) }} </h4>
         </div>
     </div>
 </template>

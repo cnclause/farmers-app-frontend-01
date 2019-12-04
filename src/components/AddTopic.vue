@@ -43,9 +43,6 @@ export default {
     //          return this.topics
     // },
     methods: {
-        updateNewTopic(user){
-            this.newTopic = user
-        },
         addTopic(event){
             event.preventDefault()
             const formData = new FormData(event.target)
