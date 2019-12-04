@@ -74,6 +74,12 @@ export default new Vuex.Store({
           .then(response => response.json())
           .then(topics => commit('setTopics', topics))
 
+    // }, postTopics({ commit }, topic){
+    //     fetch('http://localhost:3000/topics', {
+    //       method: 'PATCH',
+    //       headers: { 'Content-Type': 'application/json'},
+    //       body: JSON.stringify(topic)
+    //     }).then(topics => commit('setTopics', [...topics, topics]))
     }
 
   },

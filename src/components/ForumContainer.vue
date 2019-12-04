@@ -5,6 +5,7 @@
     <add-topic
         v-if="isHidden === true"
         :user="user"
+        :topics ="topics"
         :isHidden="isHidden"
     />
     <div :key='topic.id' v-for="topic in topics" class="forum-card">
@@ -58,7 +59,9 @@ export default {
         AddTopic
     },
     methods: {
-     
+        // postTopic(topic){
+        //     this.$emit('postTopic', topic)
+        // }
     }
 }
 </script>

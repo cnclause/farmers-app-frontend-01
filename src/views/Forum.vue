@@ -32,6 +32,11 @@ export default {
         currentUser(){
             return this.$store.state.currentUser
         }
+    },
+    methods:{
+        // postTopics(topic){
+        //     this.$store.dispatch('postTopics', topic)
+        // }
     }
 }
 </script>
@@ -51,7 +56,7 @@ export default {
         margin-bottom: 5rem;
     }
 
-    
+
 
 
 </style>

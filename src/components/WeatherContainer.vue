@@ -56,11 +56,30 @@
                 alt="thunderstorm"
             />
         </div>
+        <div class="hourly-weather-container">
+            <h2> Hourly </h2>
+            <hourly-weather
+                :weather="weather.hourly.data"
+            />
+        </div>
+        <div class="daily-weather-container">
+            <h2> Daily </h2>
+            <daily-weather
+                :weather="weather.daily.data"
+            />
+        </div>
     </div>
 </template>
 
 <script>
+import HourlyWeather from '@/components/HourlyWeather'
+import DailyWeather from '@/components/DailyWeather'
+
 export default {
+    components:{
+        HourlyWeather,
+        DailyWeather
+    },
     props:{
         weather: Object
     }
