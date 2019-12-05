@@ -49,6 +49,7 @@ export default {
     },
     methods:{
         postUser(currentUser){
+            console.log('currentUser',currentUser)
             this.$store.dispatch('postUser', currentUser)
         }
     }

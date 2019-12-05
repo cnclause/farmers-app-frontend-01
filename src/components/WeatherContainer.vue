@@ -89,12 +89,16 @@ export default {
 <style>
 @import url('https://fonts.googleapis.com/css?family=Raleway:400&display=swap');
 @import url('https://fonts.googleapis.com/css?family=Frank+Ruhl+Libre&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Roboto:300&display=swap');
+
 
 .current-weather{
     display: flex;
     flex-direction: column;
     align-items: center;
     padding-top: 2rem;
+    font-family: 'Roboto', sans-serif;
+
 }
 
 

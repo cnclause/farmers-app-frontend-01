@@ -93,36 +93,43 @@ export default new Vuex.Store({
         fetch(`http://localhost:3000/user/${id}`)
           .then(response => response.json())
           .then(currentUser => commit("setCurrentUser", currentUser))
-    }, postUser({ commit }, userInfo){
-      console.log(userInfo)
-        const id = userInfo.id
+    }, 
+    postUser({ commit }, currentUser){
+        console.log('userInfo', currentUser)
+        const id = currentUser.id
         fetch(`http://localhost:3000/user/${id}`, {
           method: 'PATCH',
           headers: { 'Content-Type': 'application/json'},
-          body: JSON.stringify(userInfo)
+          body: JSON.stringify(currentUser)
         }).then(response => response.json())
+          // .then(result => console.log(result))
           .then(currentUser => commit('setCurrentUser', currentUser))
-    }, fetchNews({ commit }){
+    }, 
+    fetchNews({ commit }){
         fetch('https://newsapi.org/v2/everything?q=cannabis&sortBy=popularity&apiKey=fd5ace6ad0b54f9c9dae1cc5004a9fb5')
           .then(response => response.json())
           .then(news => commit("setNewsArticles", news.articles))
-    }, fetchWeather({ commit }){
+    }, 
+    fetchWeather({ commit }){
         fetch('http://localhost:3000/weather/forecast')
           .then(response => response.json())
           .then(weather => commit('setWeather', weather))
-    }, fetchTopics({ commit }){
+    }, 
+    fetchTopics({ commit }){
         fetch('http://localhost:3000/comments/topics')
           .then(response => response.json())
           .then(topics => commit('setTopics', topics))
 
-    }, postTopics({ commit }, topic){
+    }, 
+    postTopics({ commit }, topic){
         fetch('http://localhost:3000/topics', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json'},
           body: JSON.stringify(topic)
         }).then(response => response.json())
             .then(topic => commit('addTopic', {...topic, comments:[]}))
-    }, postComment({ commit }, comment){
+    }, 
+    postComment({ commit }, comment){
         fetch('http://localhost:3000/comments', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json'},

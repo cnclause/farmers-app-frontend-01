@@ -49,26 +49,19 @@ export default {
        createProfile(event){
            event.preventDefault()
             const formData = new FormData(event.target)
-            this.$emit('postUser', {
+            console.log(formData.get('status'))
+
+            const currentUser={
                 status: formData.get("status"),
                 display_name: formData.get("display_name"),
                 first_name: formData.get("first_name"),
                 last_name: formData.get("last_name"),
-                id: this.user.google_id
-            })
+                id: this.user.id
+            }
 
-            this.user.status = formData.get("status")
+            this.$emit('postUser', currentUser)
 
-        // fetch(`http://localhost:3000/user/${id}`, {
-        //   method: 'PATCH',
-        //   headers: { 'Content-Type': 'application/json'},
-        //   body: JSON.stringify({ status, display_name, first_name, last_name })
-        // }).then(response => response.json())
-        //     .then(result => {
-        //         this.user = result
-        //     })
-
-        // this.$store.dispatch('postUser', userInfo)
+            // this.user.status = formData.get("status")
        }
    }
 }
