@@ -10,6 +10,7 @@
             v-if="editPost"
             :comment="comment"
             :editPost="editPost"
+            @toggleEditPost="toggleEditPost"
         /> 
         <form class ="add-comment-form" v-on:submit.prevent="addResponse($event)">
             <textarea
@@ -35,7 +36,8 @@ export default {
     props:{
         topicId: Number,
         comment: Object,
-        user: Object
+        user: Object,
+        commentId: Number
     },
     components:{
         EditPost
@@ -52,6 +54,11 @@ export default {
             })
 
             event.target.reset()
+        },
+        toggleEditPost(){
+            this.editPost !== true
+            ? this.editPost = true
+            : this.editPost = false
         }
     }
 }

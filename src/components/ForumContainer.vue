@@ -79,10 +79,6 @@ export default {
     data(){
         return {
             isHidden: false,
-            // editPost: false
-            // showComment: false,
-            // showCommentTwo: false,
-            // showCommentThree: false,
         }
     },
     props:{
@@ -102,9 +98,6 @@ export default {
         postComment(comment){
             this.$emit('postComment', comment)
         },
-        // toggleShowComment(){
-        //     this.showComment = !this.showComment
-        // }
     }
 }
 </script>
@@ -124,12 +117,13 @@ export default {
     width: 70%;
     /* border: 1pt solid black; */
     margin: 2rem;
+    margin-bottom: 5rem;
     min-height: 15rem;
     max-height: auto;
     box-shadow:  0px 2px 2px hsl(0,0%, 65%);
     align-items: left;
     padding-bottom: 1rem;
-    border: 1px solid black;
+    border: 0.1px solid hsl(0,0%, 70%);
 
 }
 

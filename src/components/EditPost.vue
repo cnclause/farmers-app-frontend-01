@@ -1,9 +1,10 @@
 <template>
-    <div class="edit-post">
+    <div class="edit-post" v-if="editPost === true">
         <form class="edit-post-forum">
-        <i class="fa fa-times-cirlce"></i>
-        <h2 class="edit-title">Edit Comment </h2>
-        <button v-on:click="editPost = false">Close</button>
+        <div class="icon-close-container">
+            <i v-on:click="toggleEditPost" class="fa fa-window-close"></i>
+        </div>
+            <h2 class="edit-title">Edit Comment </h2>
             <textarea
                 class="textarea-comment"
                 name="response"
@@ -20,11 +21,18 @@ export default {
     props:{
         comment: Object,
         editPost: Boolean
+    },
+    methods:{
+        toggleEditPost(){
+            this.$emit('toggleEditPost')
+        }
     }
+    
 }
 </script>
 
 <style>
+
 .edit-post{
     position: fixed;
     top: 0;
@@ -38,12 +46,22 @@ export default {
     align-items: center;
     width: 100%;
 }
+.icon-close-container{
+    width: 100%;
+}
+
+.fa-window-close{
+    float: right;
+}
+
 .edit-title{
     padding: 9px;
-    background-color: #8FB339;
+    /* background-color: #8FB339; */
     margin-bottom: 4px;
     border-radius: 5px;
-    font-weight: bold
+    font-weight: bold;
+    text-align: center;
+    justify-self: center;
 }
 .edit-post-forum{
   overflow-x: auto;
@@ -60,7 +78,4 @@ export default {
     background-color: black;
 }
 
-button{
-    align-self: right;
-}
 </style>
