@@ -1,7 +1,7 @@
 <template>
     <div class="weather-sidebar">
         <div class="current-weather">
-            <h2> Current Weather </h2>
+            <h2 class="weather-title"> Current Weather </h2>
             <p>{{weather.currently.summary}}</p>
             <img v-if="weather.currently.icon === 'clear-day'"
                 src="../images/clear-sun.png"
@@ -57,13 +57,13 @@
             />
         </div>
         <div class="hourly-weather-container">
-            <h2> Hourly </h2>
+            <h2 class="weather-title"> Hourly </h2>
             <hourly-weather
                 :weather="weather.hourly.data"
             />
         </div>
         <div class="daily-weather-container">
-            <h2> Daily </h2>
+            <h2 class="weather-title"> Daily </h2>
             <daily-weather
                 :weather="weather.daily.data"
             />
@@ -98,11 +98,12 @@ export default {
 }
 
 
-h2{
+.weather-title{
     font-family: 'Raleway', sans-serif;
     text-align:center;
     padding-top: 1rem;
     font-size: 18pt;
+    margin-bottom: 1rem;
 }
 
 p{
@@ -110,8 +111,8 @@ p{
 }
 
 .weather-icon{
-    width: 5.5rem;
-    height: 5.5rem;
+    width: 6.5rem;
+    height: 6.5rem;
 }
 
 

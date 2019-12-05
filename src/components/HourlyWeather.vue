@@ -1,8 +1,9 @@
 <template>
     <div class="hourly-weather">
         <div :key='hourly.id' v-for="hourly in weather" class="weather-card">
-            <h4>Time: {{hourly.time}} </h4>
+            <h4>{{ formatTime(hourly.time) }} </h4>
             <h3> {{hourly.summary}}</h3>
+            <h4 class="temperature-number">{{ calculateTemperature(hourly.temperature) }} </h4>
             <img v-if="hourly.icon === 'clear-day'"
                 src="../images/clear-sun.png"
                 alt="sun-icon"
@@ -55,21 +56,27 @@
                 src="../images/thunder-rain.png"
                 alt="thunderstorm"
             />
-            <h4>Temperature: {{ calculateTemperature(hourly.temperature) }} </h4>
+            
         </div>
     </div>
 </template>
 
 <script>
+const moment = require('moment');
 export default {
     props:{
         weather: Array
     },
     methods:{
         calculateTemperature(celciusTemp){
-            return((celciusTemp * 1.8) + 32)
+            const farenheightTemp = ((celciusTemp * 1.8) + 32)
+            return Math.round(farenheightTemp)
+        },
+        formatTime(time){
+        console.log('time', time)
+        return moment.unix(time).format('h:mm A')
         }
-    }
+    }, 
 }
 </script>
 
@@ -84,5 +91,12 @@ export default {
     flex-direction: column;
     align-items: center;
     padding-top: 2rem;
+    border: 1pt solid black;
+    margin-bottom: 1rem;
+    padding-bottom: 1rem;
+}
+
+.temperature-number{
+    font-size: 18pt;
 }
 </style>
