@@ -38,23 +38,28 @@ export default new Vuex.Store({
       if(!comment.parent_id){
         state.topics.filter(topic => {
           if(comment.topic_id === topic.id){
-            topic.comments.push(comment)
+            topic.comments.unshift(comment)
           }
         })
       } else {
         state.topics.filter(topic => {
+          console.log('topic', topic)
           if(comment.topic_id === topic.id){
             topic.comments.filter(firstComment => {
+              console.log('firstComment',firstComment)
              if(comment.parent_id === firstComment.id){
-              firstComment.comments.push(comment)
+              firstComment.comments.unshift(comment)
              } else {
                 firstComment.comments.filter(secondComment => {
+                  console.log('secondComment',secondComment)
                   if(comment.parent_id === secondComment.id){
-                    secondComment.comments.push(comment)
+                    secondComment.comments.unshift(comment)
                   } else {
+                    console.log('third comment about filter')
                     secondComment.comments.filter(thirdComment => {
+                      console.log('thirdComment',thirdComment)
                       if(comment.parent_id === thirdComment.id){
-                        thirdComment.comments.push(comment)
+                        thirdComment.comments.unshift(comment)
                       }
                     })
                   }
@@ -114,14 +119,14 @@ export default new Vuex.Store({
           headers: { 'Content-Type': 'application/json'},
           body: JSON.stringify(topic)
         }).then(response => response.json())
-            .then(topic => commit('addTopic', topic))
+            .then(topic => commit('addTopic', {...topic, comments:[]}))
     }, postComment({ commit }, comment){
         fetch('http://localhost:3000/comments', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json'},
           body: JSON.stringify(comment)
         }).then(response => response.json())
-            .then(comment => commit('addComment', comment))
+            .then(comment => commit('addComment', {...comment, comments:[]}))
   }
 
   },
