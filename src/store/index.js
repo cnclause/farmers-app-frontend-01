@@ -48,21 +48,16 @@ export default new Vuex.Store({
         })
       } else {
         state.topics.filter(topic => {
-          console.log('topic', topic)
           if(comment.topic_id === topic.id){
             topic.comments.filter(firstComment => {
-              console.log('firstComment',firstComment)
              if(comment.parent_id === firstComment.id){
               firstComment.comments.unshift(comment)
              } else {
                 firstComment.comments.filter(secondComment => {
-                  console.log('secondComment',secondComment)
                   if(comment.parent_id === secondComment.id){
                     secondComment.comments.unshift(comment)
                   } else {
-                    console.log('third comment about filter')
                     secondComment.comments.filter(thirdComment => {
-                      console.log('thirdComment',thirdComment)
                       if(comment.parent_id === thirdComment.id){
                         thirdComment.comments.unshift(comment)
                       }
@@ -100,14 +95,12 @@ export default new Vuex.Store({
           .then(currentUser => commit("setCurrentUser", currentUser))
     }, 
     postUser({ commit }, currentUser){
-        console.log('userInfo', currentUser)
         const id = currentUser.id
         fetch(`http://localhost:3000/user/${id}`, {
           method: 'PATCH',
           headers: { 'Content-Type': 'application/json'},
           body: JSON.stringify(currentUser)
         }).then(response => response.json())
-          // .then(result => console.log(result))
           .then(currentUser => commit('setCurrentUser', currentUser))
     }, 
     fetchNews({ commit }){

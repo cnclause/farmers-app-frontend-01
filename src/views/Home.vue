@@ -30,9 +30,11 @@ export default {
   computed: {
     ...mapState(['user']),
     getLoginURL(){
-      if (window.location.hostname ==='localhost') {
+      // if (window.location.hostname ==='cannect-01.firebaseapp.com') {
+        if (window.location.hostname ==='localhost') {
         return 'http://localhost:3000/auth/google'
       } else {
+        // return 'https://cannect-01.firebaseapp.com'
         return 'http://localhost:8080'
       }
     }

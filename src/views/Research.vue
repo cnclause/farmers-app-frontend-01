@@ -8,7 +8,7 @@
         />
         <div class="research">
             <h1 class="title">Educational Resources</h1>
-            <philosophy-content />
+            <educational-content />
         </div>
   </div>
 </template>
@@ -16,12 +16,14 @@
 <script>
 import HomeNav from '@/components/HomeNav'
 import LoggedInNav from '@/components/LoggedInNav'
+import EducationalContent from '@/components/EducationalContent'
 
 export default {
     name: 'research',
     components: {
         HomeNav,
-        LoggedInNav
+        LoggedInNav,
+        EducationalContent
     },
     computed: {
         currentUser() {
