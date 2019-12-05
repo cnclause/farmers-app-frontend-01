@@ -1,7 +1,19 @@
 <template>
     <div class="add-response">
+        <i 
+            v-if="user.id === comment.user_id" 
+            class="fa fa-pencil"
+            v-on:click="editPost = true"
+        >
+        </i>
+        <edit-post
+            v-if="editPost"
+            :comment="comment"
+            :editPost="editPost"
+        /> 
         <form class ="add-comment-form" v-on:submit.prevent="addResponse($event)">
             <textarea
+                class="textarea-comment"
                 name="response"
                 rows="1"
                 placeholder="Comment"
@@ -13,11 +25,20 @@
 </template>
 
 <script>
+import EditPost from '@/components/EditPost'
 export default {
+    data(){
+        return{
+            editPost: false
+        }
+    },
     props:{
         topicId: Number,
-        commentId: Number,
+        comment: Object,
         user: Object
+    },
+    components:{
+        EditPost
     },
     methods: {
         addResponse(event){
@@ -35,3 +56,12 @@ export default {
     }
 }
 </script>
+
+<style>
+.fa-pencil{
+    color: #8FB339;
+    align-self: center;
+    margin-right: 1rem;
+}
+
+</style>

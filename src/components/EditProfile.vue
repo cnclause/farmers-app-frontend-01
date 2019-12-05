@@ -129,7 +129,7 @@ select{
 
 form p{
     font-size: 10pt;
-    color: red;
+    /* color: red; */
 }
 
 </style>

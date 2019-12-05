@@ -15,6 +15,7 @@
             Description: {{topic.description}}
             <i v-if="user.id === topic.user_id" class="fa fa-pencil"></i>
         <add-comment
+            :topic="topic"
             :topicId="topic.id"
             :user="user"
             @postComment="postComment"
@@ -24,21 +25,21 @@
             <div :key="comment.id"  v-for="comment in topic.comments" class="comments">
                 <p class="comment-response">
                    {{user.display_name}}: {{comment.response}}
-                    <i v-if="user.id === topic.user_id" class="fa fa-pencil"></i>
-                
                     <add-response
+                        :comment="comment"
                         :topicId="topic.id"
                         :commentId="comment.id"
                         :user="user"
                         @postComment="postComment"
                     />
+                     
                 </p>
                 <div class="comment-wrapper" v-if="comment.comments && comment.comments.length > 0">
                     <div :key="response.id"  v-for="response in comment.comments" class="comments">
                         <p class="comment-response-two">
                             User: {{response.response}}
-                            <i v-if="user.id === topic.user_id" class="fa fa-pencil"></i>
                             <add-response
+                                :comment="response"
                                 :topicId="topic.id"
                                 :commentId="response.id"
                                 :user="user"
@@ -49,8 +50,8 @@
                             <div :key="responses.id"  v-for="responses in response.comments" class="comments">
                                 <p class="comment-response-three">
                                     THIRD: {{responses.response}}
-                                    <i v-if="user.id === topic.user_id" class="fa fa-pencil"></i>
                                     <add-response
+                                        :comment="responses"
                                         :topicId="topic.id"
                                         :commentId="response.id"
                                         :user="user"
@@ -72,11 +73,13 @@
 import AddTopic from '@/components/AddTopic'
 import AddComment from '@/components/AddComment'
 import AddResponse from '@/components/AddResponse'
+// import EditPost from '@/components/EditPost'
 
 export default {
     data(){
         return {
             isHidden: false,
+            // editPost: false
             // showComment: false,
             // showCommentTwo: false,
             // showCommentThree: false,
@@ -89,7 +92,8 @@ export default {
     components:{
         AddTopic,
         AddComment,
-        AddResponse
+        AddResponse,
+        // EditPost
     },
     methods: {
         postTopic(topic){
@@ -159,10 +163,6 @@ export default {
     margin-left: 9rem;
 }
 
-i{
-    margin-left: 0.5rem;
-    color: #8FB339;
-}
 
 .form-button{
     font-family: 'Raleway', sans-serif;

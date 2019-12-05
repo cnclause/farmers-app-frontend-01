@@ -13,9 +13,11 @@
 </template>
 
 <script>
+
 export default {
     props:{
         topicId: Number,
+        topic: Object,
         user: Object
     },
     methods: {
@@ -35,6 +37,9 @@ export default {
 </script>
 
 <style>
+.add-response{
+    display: flex;
+}
 .add-comment-form{
     display: flex;
     flex-flow: row;
@@ -49,4 +54,10 @@ export default {
     width: 6rem;
     height: 2rem;
 }
+
+/* i{
+    color: #8FB339;
+    align-self: center;
+    margin-right: 1rem;
+} */
 </style>
