@@ -1,7 +1,10 @@
 <template>
     <div class="profile">
         <header class="profile-header">
-            <logged-in-nav></logged-in-nav>
+            <logged-in-nav
+                :user ="currentUser"
+                @logoutUser="logoutUser"
+            />
         </header>
         <div class="profile-body">
             <edit-profile
@@ -49,8 +52,10 @@ export default {
     },
     methods:{
         postUser(currentUser){
-            console.log('currentUser',currentUser)
             this.$store.dispatch('postUser', currentUser)
+        },
+        logoutUser(){
+            this.$store.dispatch('logoutUser')
         }
     }
 }

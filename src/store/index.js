@@ -22,6 +22,11 @@ export default new Vuex.Store({
     setCurrentUser(state, currentUser){
       state.currentUser = currentUser
     },
+    logoutUser(state){
+      state.currentUser = null
+      state.user = null
+      state.token = null
+    },
     setNewsArticles(state, news){
       state.news = news
     },
@@ -136,7 +141,10 @@ export default new Vuex.Store({
           body: JSON.stringify(comment)
         }).then(response => response.json())
             .then(comment => commit('addComment', {...comment, comments:[]}))
-  }
+  },
+    logoutUser({ commit }){
+      commit('logoutUser')
+    }
 
   },
   modules: {
