@@ -10,15 +10,27 @@
         :isHidden="isHidden"
     />
     <div :key='topic.id' v-for="topic in topics" class="forum-card">
-        <h1 class="topic-title">Topic: {{topic.title}}</h1>
+        <h1 class="topic-title">
+            Topic: {{topic.title}}
+            <i 
+                v-if="user.id === topic.user_id" 
+                class="fa fa-pencil"
+                v-on:click="toggleEditTopic"
+            ></i>
+        </h1>
         <p class="topic-description">
             Description: {{topic.description}}
-            <i v-if="user.id === topic.user_id" class="fa fa-pencil"></i>
         <add-comment
             :topic="topic"
             :topicId="topic.id"
             :user="user"
             @postComment="postComment"
+        />
+        <edit-topic
+            v-if="editTopic"
+            :topic="topic"
+            :user="user"
+            @toggleEditTopic="toggleEditTopic"
         />
         </p>
         <div class="comment-wrapper" v-if="topic.comments && topic.comments.length > 0">
@@ -71,14 +83,15 @@
 
 <script>
 import AddTopic from '@/components/AddTopic'
-import AddComment from '@/components/AddComment'
-import AddResponse from '@/components/AddResponse'
-// import EditPost from '@/components/EditPost'
+import AddComment from '@/components/AddCommentToTopic'
+import AddResponse from '@/components/AddResponseToComment'
+import EditTopic from '@/components/EditTopic'
 
 export default {
     data(){
         return {
             isHidden: false,
+            editTopic: false
         }
     },
     props:{
@@ -89,7 +102,7 @@ export default {
         AddTopic,
         AddComment,
         AddResponse,
-        // EditPost
+        EditTopic
     },
     methods: {
         postTopic(topic){
@@ -98,6 +111,11 @@ export default {
         postComment(comment){
             this.$emit('postComment', comment)
         },
+        toggleEditTopic(){
+            this.editTopic !== true
+            ? this.editTopic = true
+            : this.editTopic = false
+        }
     }
 }
 </script>

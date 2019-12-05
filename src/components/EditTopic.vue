@@ -1,15 +1,20 @@
 <template>
-    <div class="edit-post" v-if="editPost === true">
-        <form class="edit-post-forum">
-        <div class="icon-close-container">
-            <i v-on:click="toggleEditPost" class="fa fa-window-close"></i>
+<div class="edit-topic">
+    <form class="edit-topic-form">
+        <div class="icon-close-container-topic">
+            <i v-on:click="toggleEditTopic" class="fa fa-window-close"></i>
         </div>
-            <h2 class="edit-title">Edit Comment </h2>
+            <h2 class="edit-title-topic">Edit Topic</h2>
+             <input
+                type="text"
+                name="title"
+                :placeholder="topic.title"
+             />
             <textarea
                 class="textarea-comment"
-                name="response"
+                name="description"
                 rows="3"
-                :placeholder="comment.response"
+                :placeholder="topic.description"
             />
             <input type="submit" value="Comment"/>
     </form>
@@ -19,21 +24,20 @@
 <script>
 export default {
     props:{
-        comment: Object,
-        editPost: Boolean
+        user: Object,
+        topic: Object
     },
     methods:{
-        toggleEditPost(){
-            this.$emit('toggleEditPost')
+        toggleEditTopic(){
+            this.$emit('toggleEditTopic')
         }
     }
-    
 }
 </script>
 
 <style>
 
-.edit-post{
+.edit-topic{
     position: fixed;
     top: 0;
     bottom: 0;
@@ -46,7 +50,7 @@ export default {
     align-items: center;
     width: 100%;
 }
-.icon-close-container{
+.icon-close-container-topic{
     width: 100%;
 }
 
@@ -54,7 +58,7 @@ export default {
     float: right;
 }
 
-.edit-title{
+.edit-title-topic{
     padding: 9px;
     /* background-color: #8FB339; */
     margin-bottom: 4px;
@@ -63,7 +67,7 @@ export default {
     text-align: center;
     justify-self: center;
 }
-.edit-post-forum{
+.edit-topic-form{
   overflow-x: auto;
   display: flex;
   flex-direction: column;
