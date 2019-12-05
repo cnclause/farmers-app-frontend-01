@@ -93,13 +93,15 @@ export default new Vuex.Store({
         fetch(`http://localhost:3000/user/${id}`)
           .then(response => response.json())
           .then(currentUser => commit("setCurrentUser", currentUser))
-    // }, postUser(userInfo){
-    //     const id = this.state.user.google_id
-    //     fetch(`http://localhost:3000/user/${id}`, {
-    //       method: 'PATCH',
-    //       headers: { 'Content-Type': 'application/json'},
-    //       body: JSON.stringify({ userInfo })
-    //     }).then(console.log)
+    }, postUser({ commit }, userInfo){
+      console.log(userInfo)
+        const id = userInfo.id
+        fetch(`http://localhost:3000/user/${id}`, {
+          method: 'PATCH',
+          headers: { 'Content-Type': 'application/json'},
+          body: JSON.stringify(userInfo)
+        }).then(response => response.json())
+          .then(currentUser => commit('setCurrentUser', currentUser))
     }, fetchNews({ commit }){
         fetch('https://newsapi.org/v2/everything?q=cannabis&sortBy=popularity&apiKey=fd5ace6ad0b54f9c9dae1cc5004a9fb5')
           .then(response => response.json())

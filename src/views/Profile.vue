@@ -6,6 +6,7 @@
         <div class="profile-body">
             <edit-profile
                 v-if="currentUser.status === null"
+                @postUser="postUser"
                 :user="currentUser"
             /> 
             <profile-home
@@ -45,7 +46,11 @@ export default {
         weather(){
             return this.$store.state.weather
         },
-
+    },
+    methods:{
+        postUser(currentUser){
+            this.$store.dispatch('postUser', currentUser)
+        }
     }
 }
 </script>

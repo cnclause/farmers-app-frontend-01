@@ -45,26 +45,28 @@ export default {
    props: {
        user: Object
    },
-//    mounted(){
-//        console.log("user in profile",this.user)
-//        return this.user
-//    },
    methods: {
        createProfile(event){
-        //    event.preventDefault()
-           const formData = new FormData(event.target)
+           event.preventDefault()
+            const formData = new FormData(event.target)
+            this.$emit('postUser', {
+                status: formData.get("status"),
+                display_name: formData.get("display_name"),
+                first_name: formData.get("first_name"),
+                last_name: formData.get("last_name"),
+                id: this.user.google_id
+            })
 
-           const status = formData.get("status")
-           const display_name = formData.get("display_name")
-           const first_name = formData.get("first_name")
-           const last_name = formData.get("last_name")
+            this.user.status = formData.get("status")
 
-        const id = this.user.google_id
-        fetch(`http://localhost:3000/user/${id}`, {
-          method: 'PATCH',
-          headers: { 'Content-Type': 'application/json'},
-          body: JSON.stringify({ status, display_name, first_name, last_name })
-        }).then(result => console.log("we did it", result))
+        // fetch(`http://localhost:3000/user/${id}`, {
+        //   method: 'PATCH',
+        //   headers: { 'Content-Type': 'application/json'},
+        //   body: JSON.stringify({ status, display_name, first_name, last_name })
+        // }).then(response => response.json())
+        //     .then(result => {
+        //         this.user = result
+        //     })
 
         // this.$store.dispatch('postUser', userInfo)
        }
