@@ -2,7 +2,6 @@
     <div class="profile-home">
         <div class="weather-side">
             <!-- <h1> {{user.display_name}} </h1> -->
-            <h1> Weather Hurr </h1>
             <weather-container 
                 :weather="weather"
             />

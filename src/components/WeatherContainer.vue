@@ -2,7 +2,7 @@
     <div class="weather-sidebar">
         <div class="current-weather">
             <h2 class="weather-title"> Current Weather </h2>
-            <p>{{weather.currently.summary}}</p>
+            <p class="weather-summary">{{weather.currently.summary}}</p>
             <img v-if="weather.currently.icon === 'clear-day'"
                 src="../images/clear-sun.png"
                 alt="sun-icon"
@@ -100,7 +100,11 @@ export default {
     font-family: 'Roboto', sans-serif;
 
 }
-
+.weather-summary{
+    font-family: 'Roboto', sans-serif;
+    letter-spacing: 0.1em;
+    margin-top: 0.2em;
+}
 
 .weather-title{
     font-family: 'Raleway', sans-serif;
@@ -108,6 +112,7 @@ export default {
     padding-top: 1rem;
     font-size: 18pt;
     margin-bottom: 1rem;
+    text-decoration: underline;
 }
 
 p{
@@ -117,6 +122,7 @@ p{
 .weather-icon{
     width: 6.5rem;
     height: 6.5rem;
+    margin-top: 0;
 }
 
 

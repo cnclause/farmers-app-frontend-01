@@ -12,6 +12,7 @@
     <div :key='topic.id' v-for="topic in topics" class="forum-card">
         <h1 class="topic-title">
             Topic: {{topic.title}}
+            <p class="post-created"> {{ formatTime(topic.created_at) }} </p>
             <i 
                 v-if="user.id === topic.user_id" 
                 class="fa fa-pencil"
@@ -35,8 +36,9 @@
         </p>
         <div class="comment-wrapper" v-if="topic.comments && topic.comments.length > 0">
             <div :key="comment.id"  v-for="comment in topic.comments" class="comments">
-                <p class="comment-response">
+                <section class="comment-response">
                    {{user.display_name}}: {{comment.response}}
+                    <p class="comment-created"> {{formatTime(comment.created_at)}} </p>
                     <add-response
                         :comment="comment"
                         :topicId="topic.id"
@@ -45,11 +47,12 @@
                         @postComment="postComment"
                     />
                      
-                </p>
+                </section>
                 <div class="comment-wrapper" v-if="comment.comments && comment.comments.length > 0">
                     <div :key="response.id"  v-for="response in comment.comments" class="comments">
-                        <p class="comment-response-two">
-                            User: {{response.response}}
+                        <section class="comment-response-two">
+                            {{user.display_name}}: {{response.response}}
+                            <p class="comment-created"> {{formatTime(comment.created_at)}} </p>
                             <add-response
                                 :comment="response"
                                 :topicId="topic.id"
@@ -57,11 +60,12 @@
                                 :user="user"
                                 @postComment="postComment"
                             />
-                        </p>
+                        </section>
                         <div class="comment-wrapper" v-if="response.comments && response.comments.length > 0">
                             <div :key="responses.id"  v-for="responses in response.comments" class="comments">
-                                <p class="comment-response-three">
-                                    THIRD: {{responses.response}}
+                                <section class="comment-response-three">
+                                    {{user.display_name}}: {{responses.response}}
+                                    <p class="comment-created"> {{formatTime(comment.created_at)}} </p>
                                     <add-response
                                         :comment="responses"
                                         :topicId="topic.id"
@@ -69,7 +73,7 @@
                                         :user="user"
                                         @postComment="postComment"
                                     />
-                                </p>
+                                </section>
                             </div>
                         </div>
                     </div>
@@ -86,6 +90,7 @@ import AddTopic from '@/components/AddTopic'
 import AddComment from '@/components/AddCommentToTopic'
 import AddResponse from '@/components/AddResponseToComment'
 import EditTopic from '@/components/EditTopic'
+const moment = require('moment');
 
 export default {
     data(){
@@ -105,6 +110,7 @@ export default {
         EditTopic
     },
     methods: {
+        
         postTopic(topic){
             this.$emit('postTopic', topic)
         },
@@ -115,12 +121,17 @@ export default {
             this.editTopic !== true
             ? this.editTopic = true
             : this.editTopic = false
+        },
+        formatTime(time){
+            return moment(time).format('MMMM Do YYYY, h:mm:ss A')
         }
     }
 }
 </script>
 
 <style>
+
+
 @import url('https://fonts.googleapis.com/css?family=Raleway:400&display=swap');
 @import url('https://fonts.googleapis.com/css?family=Frank+Ruhl+Libre&display=swap');
 
@@ -183,5 +194,19 @@ export default {
     margin-bottom: 2rem;
 }
 
+section{
+    font-size: 14pt;
+    font-family: 'Raleway', sans-serif;
+    line-height: 1.7em;
+}
+.comment-created{
+    text-align: left;
+}
+
+.comment-created, .post-created{
+    font-size: 11pt;
+    color:hsl(0,0%, 60%);
+    font-family: 'Roboto', sans-serif;
+}
 
 </style>

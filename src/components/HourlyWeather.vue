@@ -1,9 +1,9 @@
 <template>
     <div class="hourly-weather">
         <div :key='hourly.id' v-for="hourly in weather" class="weather-card">
-            <h4>{{ formatTime(hourly.time) }} </h4>
-            <h3> {{hourly.summary}}</h3>
-            <h4 class="temperature-number">{{ calculateTemperature(hourly.temperature) }} </h4>
+            <h4 class="weather-summary">{{ formatTime(hourly.time) }} </h4>
+            <h3 class="weather-summary"> {{hourly.summary}}</h3>
+            <h4 class="temperature-number weather-summary">{{ calculateTemperature(hourly.temperature) }} </h4>
             <img v-if="hourly.icon === 'clear-day'"
                 src="../images/clear-sun.png"
                 alt="sun-icon"
@@ -73,7 +73,6 @@ export default {
             return Math.round(farenheightTemp)
         },
         formatTime(time){
-        console.log('time', time)
         return moment.unix(time).format('h:mm A')
         }
     }, 
@@ -91,7 +90,7 @@ export default {
     flex-direction: column;
     align-items: center;
     padding-top: 2rem;
-    border: 1pt solid black;
+    /* border: 1pt solid black; */
     margin-bottom: 1rem;
     padding-bottom: 1rem;
 }

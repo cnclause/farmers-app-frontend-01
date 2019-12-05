@@ -2,9 +2,9 @@
     <div class="daily-weather">
         <div :key='daily.id' v-for="daily in weather" class="weather-card">
             <!-- <h4>Time: {{daily.time}} </h4> -->
-            <h3> {{daily.summary}}</h3>
-            <h3> Sunrise: {{daily.sunriseTime}}</h3>
-            <h3> Sunset: {{daily.sunsetTime}}</h3>
+            <h3 class="weather-summary"> {{daily.summary}}</h3>
+            <h3 class="weather-summary"> Sunrise: {{formatTime(daily.sunriseTime)}}</h3>
+            <h3 class="weather-summary"> Sunset: {{formatTime(daily.sunsetTime)}}</h3>
             <img v-if="daily.icon === 'clear-day'"
                 src="../images/clear-sun.png"
                 alt="sun-icon"
@@ -58,21 +58,35 @@
                 src="../images/thunder-rain.png"
                 alt="thunderstorm"
             />
-            <h4>High: {{daily.temperatureMax}} </h4>
-            <h4>Low: {{daily.temperatureMin}} </h4>
+            <h4 class="weather-summary">High: {{calculateTemperature(daily.temperatureMax)}} </h4>
+            <h4 class="weather-summary"> Low: {{calculateTemperature(daily.temperatureMin)}} </h4>
         </div>
     </div>
 </template>
 
 <script>
+const moment = require('moment');
+
 export default {
     props:{
         weather: Array
     },
-    // methods:{
-    //     calculateTemperature(celciusTemp){
-    //         return((celciusTemp * 1.8) + 32)
-    //     }
-    // }
+    methods:{
+        calculateTemperature(celciusTemp){
+            const farenheightTemp = ((celciusTemp * 1.8) + 32)
+            return Math.round(farenheightTemp)
+        },
+        formatTime(time){
+        return moment.unix(time).format('h:mm A')
+        }
+    }
 }
 </script>
+
+<style>
+.daily-weather{
+    height: 30rem;
+    overflow: scroll;
+    margin-bottom: 3rem;
+}
+</style>
