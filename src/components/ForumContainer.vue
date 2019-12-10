@@ -12,6 +12,7 @@
     <div :key='topic.id' v-for="topic in topics" class="forum-card">
         <h1 class="topic-title">
             Topic: {{topic.title}}
+            <p class="post-created"> {{ user.status }} </p>
             <p class="post-created"> {{ formatTime(topic.created_at) }} </p>
             <i 
                 v-if="user.id === topic.user_id" 
@@ -37,7 +38,8 @@
         <div class="comment-wrapper" v-if="topic.comments && topic.comments.length > 0">
             <div :key="comment.id"  v-for="comment in topic.comments" class="comments">
                 <section class="comment-response">
-                   {{user.display_name}}: {{comment.response}}
+                   User: {{comment.response}}
+                    <p class="comment-created"> cultivator </p>
                     <p class="comment-created"> {{formatTime(comment.created_at)}} </p>
                     <add-response
                         :comment="comment"
@@ -51,7 +53,8 @@
                 <div class="comment-wrapper" v-if="comment.comments && comment.comments.length > 0">
                     <div :key="response.id"  v-for="response in comment.comments" class="comments">
                         <section class="comment-response-two">
-                            {{user.display_name}}: {{response.response}}
+                            display_name01: {{response.response}}
+                            <p class="comment-created"> enthusiast</p>
                             <p class="comment-created"> {{formatTime(comment.created_at)}} </p>
                             <add-response
                                 :comment="response"
@@ -64,7 +67,7 @@
                         <div class="comment-wrapper" v-if="response.comments && response.comments.length > 0">
                             <div :key="responses.id"  v-for="responses in response.comments" class="comments">
                                 <section class="comment-response-three">
-                                    {{user.display_name}}: {{responses.response}}
+                                    User_2: {{responses.response}}
                                     <p class="comment-created"> {{formatTime(comment.created_at)}} </p>
                                     <add-response
                                         :comment="responses"

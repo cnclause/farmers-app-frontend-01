@@ -31,7 +31,7 @@ export default {
     ...mapState(['user']),
     getLoginURL(){
       if (window.location.hostname ==='cannect-01.firebaseapp.com') {
-        return 'http://localhost:3000/auth/google'
+        return 'https://cannect-01.herokuapp.com/auth/google'
       } else {
         return 'http://cannect-01.firebaseapp.com'
       }

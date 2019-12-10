@@ -13,7 +13,6 @@ export default {
 //     AppNav
 //   },
   mounted(){
-	console.log("token params", this.$route)
 	this.$store.dispatch('login',this.$route.query.token)
   },
 

@@ -90,13 +90,13 @@ export default new Vuex.Store({
   
     }, fetchUser({ commit }){
         const id = this.state.user.google_id
-        fetch(`http://localhost:3000/user/${id}`)
+        fetch(`https://cannect-01.herokuapp.com/user/${id}`)
           .then(response => response.json())
           .then(currentUser => commit("setCurrentUser", currentUser))
     }, 
     postUser({ commit }, currentUser){
         const id = currentUser.id
-        fetch(`http://localhost:3000/user/${id}`, {
+        fetch(`https://cannect-01.herokuapp.com/user/${id}`, {
           method: 'PATCH',
           headers: { 'Content-Type': 'application/json'},
           body: JSON.stringify(currentUser)
@@ -109,18 +109,18 @@ export default new Vuex.Store({
           .then(news => commit("setNewsArticles", news.articles))
     }, 
     fetchWeather({ commit }){
-        fetch('http://localhost:3000/weather/forecast')
+        fetch('https://cannect-01.herokuapp.com/weather/forecast')
           .then(response => response.json())
           .then(weather => commit('setWeather', weather))
     }, 
     fetchTopics({ commit }){
-        fetch('http://localhost:3000/comments/topics')
+        fetch('https://cannect-01.herokuapp.com/comments/topics')
           .then(response => response.json())
           .then(topics => commit('setTopics', topics))
 
     }, 
     postTopics({ commit }, topic){
-        fetch('http://localhost:3000/topics', {
+        fetch('https://cannect-01.herokuapp.com/topics', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json'},
           body: JSON.stringify(topic)
@@ -128,7 +128,7 @@ export default new Vuex.Store({
             .then(topic => commit('addTopic', {...topic, comments:[]}))
     }, 
     postComment({ commit }, comment){
-        fetch('http://localhost:3000/comments', {
+        fetch('https://cannect-01.herokuapp.com/comments', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json'},
           body: JSON.stringify(comment)
