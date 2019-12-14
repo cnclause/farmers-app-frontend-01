@@ -15,27 +15,23 @@
                 <label>Username</label>
                     <p>*Required*</p>
                 <input type="text" name="display_name"
-                :placeholder= user.display_name
+                placeholder= "username"
                 required
                 />
             </div>
             <div class="profile-inputs">
                 <label>First Name</label>
                 <input type="text" name="first_name"
-                :placeholder= user.first_name
+                placeholder= "first name"
                 >
             </div>
             <div class="profile-inputs">
                 <label>Last Name</label>
                 <input type="text" name="last_name"
-                :placeholder= user.last_name
+                placeholder= "last name"
                 >
             </div>
             <input type="submit" value="Create Profile">
-            <!-- <label>About Me</label>
-            <input type="text" name="display_namme"
-            placeholder="This will show on your profile page"
-            > -->
         </form>
     </div>
 </template>
