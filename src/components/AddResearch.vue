@@ -1,6 +1,12 @@
 <template>
     <div class="add-research">
-        <form v-on:submit.prevent="addArticle">
+        <!-- <button id="toggle-article-form"
+            v-on:click="toggleAddArticle"
+        > Add Article
+            </button> -->
+        <form
+            v-on:submit.prevent="addArticle"
+        >
             <label> Article Title: </label>
                  <input
                     type="text"
@@ -29,12 +35,18 @@
                     placeholder="Article Link"
                     required 
                 />
+                <input type="submit" value="Add Article"/>
         </form>
     </div>
 </template>
 
 <script>
 export default {
+    data(){
+        return{
+            isHidden: false
+        }
+    },
     methods: {
         addArticle(event){
             event.preventDefault()
@@ -48,7 +60,18 @@ export default {
             })
 
             event.target.reset()
-        }
+        },
+        //  toggleAddArticle(){
+        //     this.isHidden = !this.isHidden
+        // }
     }
 }
 </script>
+
+<style>
+
+#toggle-article-form{
+    width: 15rem;
+}
+
+</style>

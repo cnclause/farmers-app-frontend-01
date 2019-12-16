@@ -8,12 +8,14 @@
         />
         <div class="add-articles"
             v-if="currentUser &&currentUser.role_id === 1">
-            <add-research/>
+            <add-research
+                @postArticle="postArticle"
+            />
         </div>
         <div class="research">
             <h1 class="title">Educational Resources</h1>
             <educational-content
-                :articles="articles" 
+                :articles="articles"
             />
         </div>   
   </div>
