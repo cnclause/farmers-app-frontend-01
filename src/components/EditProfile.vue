@@ -45,7 +45,6 @@ export default {
        createProfile(event){
            event.preventDefault()
             const formData = new FormData(event.target)
-            console.log(formData.get('status'))
 
             const currentUser={
                 status: formData.get("status"),

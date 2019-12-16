@@ -1,6 +1,5 @@
 <template>
     <div class="news-container">
-        <!-- <p> Current Headlines on Cannabis </p> -->
         <div :key='article.id' v-for="article in news" class="news-card">
             <div id="title-container">
                 <h2 class="news-title">{{article.title}}</h2>

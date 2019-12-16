@@ -3,6 +3,9 @@ import Vuex from 'vuex'
 
 Vue.use(Vuex)
 
+const baseURL = 'http://localhost:3000'
+// const baseURL = 'https://cannect-01.herokuapp.com'
+
 export default new Vuex.Store({
   state: {
     token: '',
@@ -10,6 +13,7 @@ export default new Vuex.Store({
     currentUser: null,
     news: [],
     weather: {},
+    articles:[],
     topics: []
   },
   mutations: {
@@ -32,6 +36,9 @@ export default new Vuex.Store({
     },
     setWeather(state, weather){
       state.weather = weather
+    },
+    setArticles(state, articles){
+      state.articles = articles
     },
     setTopics(state, topics){
       state.topics=topics
@@ -90,13 +97,13 @@ export default new Vuex.Store({
   
     }, fetchUser({ commit }){
         const id = this.state.user.google_id
-        fetch(`https://cannect-01.herokuapp.com/user/${id}`)
+        fetch(`${baseURL}/user/${id}`)
           .then(response => response.json())
           .then(currentUser => commit("setCurrentUser", currentUser))
     }, 
     postUser({ commit }, currentUser){
         const id = currentUser.id
-        fetch(`https://cannect-01.herokuapp.com/user/${id}`, {
+        fetch(`${baseURL}/user/${id}`, {
           method: 'PATCH',
           headers: { 'Content-Type': 'application/json'},
           body: JSON.stringify(currentUser)
@@ -109,18 +116,24 @@ export default new Vuex.Store({
           .then(news => commit("setNewsArticles", news.articles))
     }, 
     fetchWeather({ commit }){
-        fetch('https://cannect-01.herokuapp.com/weather/forecast')
+        fetch(baseURL + '/weather/forecast')
           .then(response => response.json())
           .then(weather => commit('setWeather', weather))
     }, 
     fetchTopics({ commit }){
-        fetch('https://cannect-01.herokuapp.com/comments/topics')
+        fetch(baseURL +'/topics')
           .then(response => response.json())
           .then(topics => commit('setTopics', topics))
 
     }, 
+    fetchArticles({ commit }){
+        fetch(baseURL +'/articles')
+          .then(response => response.json())
+          .then(articles => commit('setArticles', articles))
+
+    }, 
     postTopics({ commit }, topic){
-        fetch('https://cannect-01.herokuapp.com/topics', {
+        fetch(baseURL +'/topics', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json'},
           body: JSON.stringify(topic)
@@ -128,12 +141,20 @@ export default new Vuex.Store({
             .then(topic => commit('addTopic', {...topic, comments:[]}))
     }, 
     postComment({ commit }, comment){
-        fetch('https://cannect-01.herokuapp.com/comments', {
+        fetch(baseURL + '/comments', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json'},
           body: JSON.stringify(comment)
         }).then(response => response.json())
             .then(comment => commit('addComment', {...comment, comments:[]}))
+  },
+    postArticle({ commit }, article){
+        fetch(baseURL + '/articles', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json'},
+          body: JSON.stringify(article)
+        }).then(response => response.json())
+            .then(article => commit('addArticle', {...article}))
   },
     logoutUser({ commit }){
       commit('logoutUser')

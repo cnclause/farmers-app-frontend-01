@@ -38,10 +38,6 @@ export default {
         topics: Array,
         isHidden: Boolean
     },
-    // mounted(){
-    //          console.log(this.topics)
-    //          return this.topics
-    // },
     methods: {
         addTopic(event){
             event.preventDefault()
