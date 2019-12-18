@@ -6,9 +6,7 @@
 
 export default {
     mounted(){
-        console.log("we in login", this.$route)
         const { token } = this.$route.query
-        console.log('loginTokenVue', token)
         if(token) {
             this.$store.dispatch('login', token)
             this.$router.push('/profile')

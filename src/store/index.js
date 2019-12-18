@@ -3,8 +3,8 @@ import Vuex from 'vuex'
 
 Vue.use(Vuex)
 
-const baseURL = 'http://localhost:3000'
-// const baseURL = 'https://cannect-01.herokuapp.com'
+// const baseURL = 'http://localhost:3000'
+const baseURL = 'https://cannect-01.herokuapp.com'
 
 export default new Vuex.Store({
   state: {
