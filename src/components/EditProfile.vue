@@ -6,8 +6,8 @@
                 <label> Select Status </label>
                     <p>*Required*</p>
                 <select name="status" required>
-                    <option value="farmer">Farmer</option>
-                    <option value="cultivator">Cultivator</option>
+                    <option value="farmer">Cultivator</option>
+                    <option value="cultivator">Owner</option>
                     <option value="enthusiest">Enthusiest</option>
                 </select>
             </div>

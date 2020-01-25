@@ -35,7 +35,7 @@ export default {
         ProfileHome
     },
     mounted() {
-        this.$store.dispatch("fetchUser")
+        // this.$store.dispatch("fetchUser")
         this.$store.dispatch("fetchNews")
         this.$store.dispatch("fetchWeather")
     },

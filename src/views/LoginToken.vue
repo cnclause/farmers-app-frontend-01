@@ -11,7 +11,8 @@ export default {
             this.$store.dispatch('login', token)
             this.$router.push('/profile')
         } else {
-            this.$router.push('/')
+            // this.$router.push('/')
+            this.$router.push('/profile')
         }
     }
     

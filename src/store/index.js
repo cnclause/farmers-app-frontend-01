@@ -3,14 +3,24 @@ import Vuex from 'vuex'
 
 Vue.use(Vuex)
 
-// const baseURL = 'http://localhost:3000'
-const baseURL = 'https://cannect-01.herokuapp.com'
+const baseURL = 'http://localhost:3000'
+// const baseURL = 'https://cannect-01.herokuapp.com'
 
 export default new Vuex.Store({
   state: {
     token: '',
-    user: null,
-    currentUser: null,
+    user: {
+      email: 'cnclause123@gmail.com',
+      display_name: 'cnclause',
+      role_id: '1',
+      status: 'owner'
+    },
+    currentUser: {
+      email: 'cnclause123@gmail.com',
+      display_name: 'cnclause',
+      role_id: '1',
+      status: 'owner'
+    },
     news: [],
     weather: {},
     articles:[],

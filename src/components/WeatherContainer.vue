@@ -1,6 +1,7 @@
 <template>
     <div class="weather-sidebar">
         <div class="current-weather">
+            <h2 class="weather-title weather-city"> Denver,CO </h2>
             <h2 class="weather-title"> Current Weather </h2>
             <p class="weather-summary">{{weather.currently.summary}}</p>
             <img v-if="weather.currently.icon === 'clear-day'"
@@ -112,7 +113,12 @@ export default {
     padding-top: 1rem;
     font-size: 18pt;
     margin-bottom: 1rem;
+    /* line-height: 2rem; */
     text-decoration: underline;
+}
+
+.weather-city{
+    text-decoration: none;
 }
 
 p{
