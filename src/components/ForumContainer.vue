@@ -1,7 +1,9 @@
 <template>
 <div class="forum-container">
-    <button class="form-button" v-on:click="isHidden = true" v-if="isHidden === false"> Add Topic </button>
-    <button class="form-button" v-on:click="isHidden = false" v-if="isHidden === true"> X </button>
+    <div class="button-container">
+        <button class="form-button" v-on:click="isHidden = true" v-if="isHidden === false"> Add Topic </button>
+        <i v-on:click="isHidden = false" v-if="isHidden === true" class="fa fa-window-close"></i>
+    </div>
     <add-topic
         v-if="isHidden === true"
         :user="user"
@@ -195,6 +197,16 @@ export default {
     width: auto;
     font-size: 12pt;
     margin-bottom: 2rem;
+}
+
+.button-container{
+    display: flex;
+    width: 30%;
+    justify-content: center;
+}
+
+.fa-window-close{
+    float: right;
 }
 
 section{
